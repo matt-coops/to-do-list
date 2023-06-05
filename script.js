@@ -36,12 +36,13 @@ const Projects = (function () {
     View.renderProjects();
   };
   const getListProjects = () => listProjects;
+  const deleteProject = (index) => listProjects.splice(index, 1);
 
   const newTodo = () => {
     return { title, description, dueDate, priority };
   };
 
-  return { newTodo, getListProjects, newProject };
+  return { newTodo, getListProjects, newProject, deleteProject };
 })();
 
 const View = (function () {
@@ -57,7 +58,7 @@ const View = (function () {
             v.projectDesc ? v.projectDesc : ""
           }</span></p>
           <ul class="todo-list">
-          ${v.todos.map(renderTodos).join("")}
+          ${v.todos ? v.todos.map(renderTodos).join("") : ""}
         </div></ul>
       `;
       container.insertAdjacentHTML("afterbegin", html);
@@ -81,8 +82,17 @@ createProject.addEventListener("click", function (e) {
   inputProject.value = "";
 });
 
-View.renderProjects();
-
 container.addEventListener("click", function (e) {
+  if (!e.target.closest(".project")) return;
   const project = e.target.closest(".project");
+  if (e.target.classList.contains("delete--project")) {
+    Projects.deleteProject(project.dataset.project);
+    View.renderProjects();
+    return;
+  }
+  project
+    .querySelectorAll(".todo")
+    .forEach((t) => t.classList.toggle("hidden"));
 });
+
+View.renderProjects();
