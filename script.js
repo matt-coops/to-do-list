@@ -56,12 +56,21 @@ const View = (function () {
           <span class="description">${
             v.projectDesc ? v.projectDesc : ""
           }</span></p>
-        </div>
+          <ul class="todo-list">
+          ${v.todos.map(renderTodos).join("")}
+        </div></ul>
       `;
       container.insertAdjacentHTML("afterbegin", html);
     }
   };
-  return { renderProjects };
+  const renderTodos = (todo) => {
+    const html = `
+      <li class="todo hidden">${todo}
+    </li>
+      `;
+    return html;
+  };
+  return { renderProjects, renderTodos };
 })();
 
 createProject.addEventListener("click", function (e) {
@@ -76,7 +85,4 @@ View.renderProjects();
 
 container.addEventListener("click", function (e) {
   const project = e.target.closest(".project");
-  if (e.target.classList.contains("delete--project")) {
-    console.log("true");
-  }
 });

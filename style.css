@@ -30,7 +30,7 @@ body {
   margin-top: 40px;
   display: flex;
   gap: 20px;
-  border: solid 2px black;
+  /* border: solid 2px black; */
   /* background-color: rgb(160, 160, 160); */
 }
 
@@ -47,6 +47,14 @@ body {
 
 .description {
   font-size: 30px;
+}
+
+.todo {
+  font-size: 30px;
+}
+
+.todo.hidden {
+  display: none;
 }
 
 .project--btn {
