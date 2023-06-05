@@ -9,10 +9,20 @@
   </head>
   <body>
     <form class="todo--form hidden">
+      <h1>Add to-do</h1>
+      <label for="todo0">To-do</label><br />
+      <input type="text" id="todo0" name="todo0" /><br />
       <label for="todo0">To-do</label><br />
       <input type="text" id="todo0" name="todo0" /><br />
     </form>
-    <input id="new--project--input" />
+    <input
+      class="project--input new--project--input"
+      placeholder="Project title"
+    /><br /><input
+      class="project--input new--project--desc--input"
+      placeholder="Project description"
+    />
+
     <button id="create--project">Create</button>
     <div id="container">
       <!-- <button class="Add">+</button> -->

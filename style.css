@@ -8,7 +8,7 @@ body {
   padding: 40px 20px;
 }
 
-#new--project--input {
+.project--input {
   width: 600px;
   font-size: 40px;
   height: 50px;
@@ -21,49 +21,52 @@ body {
   /* padding: 8px; */
   height: 50px;
   width: 150px;
-  margin-top: -10px;
   margin-left: 20px;
 }
 
 #container {
+  display: flex;
+  flex-direction: column;
   margin-top: 40px;
   display: flex;
-  width: 1220px;
-  flex-wrap: wrap;
   gap: 20px;
-  /* background-color: bisque; */
+  border: solid 2px black;
   /* background-color: rgb(160, 160, 160); */
 }
 
 .project {
-  display: flex;
-  /* flex-direction: column; */
   background-color: rgb(214, 214, 214);
   border-radius: 10px;
   margin: 10px 0px;
   border: solid 2px black;
   width: 600px;
-  height: 200px;
+  height: auto;
   font-size: 40px;
   padding-left: 10px;
 }
 
-button {
-  margin: 10px 2px 0px 0px;
+.description {
+  font-size: 30px;
+}
+
+.project--btn {
+  margin: 10px 5px 0px 0px;
+  float: right;
   padding: 5px;
-  align-self: flex-start;
+  height: fit-content;
 }
 
 .todo--form {
-  display: flexbox;
   border: solid 2px black;
+  padding: 20px;
   background-color: white;
-  width: 600px;
+  width: 800px;
   height: fit-content;
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  position: fixed;
+  z-index: 1;
+  overflow: auto;
 }
 
-/* .todo--form.hidden {
+.todo--form.hidden {
   display: none;
-} */
+}
