@@ -8,23 +8,7 @@ const inputDesc = document.querySelector(".new--project--desc--input");
 const Controller = function () {};
 
 const Projects = (function () {
-  const listProjects = [
-    {
-      projectName: "Project 0",
-      projectDesc: "this is a test",
-      todos: ["Test", "Test2", "Test3"],
-    },
-    {
-      projectName: "Project 1",
-      projectDesc: "this is a test",
-      todos: ["Test", "Test2", "Test3"],
-    },
-    {
-      projectName: "Project 2",
-      projectDesc: "this is a test",
-      todos: ["Test", "Test2", "Test3"],
-    },
-  ];
+  let listProjects = [];
 
   const newProject = (projectName, projectDesc, dueDate, priority) => {
     listProjects.push({
@@ -42,7 +26,26 @@ const Projects = (function () {
     return { title, description, dueDate, priority };
   };
 
-  return { newTodo, getListProjects, newProject, deleteProject };
+  const setLocalStorage = () => {
+    localStorage.setItem("projects", JSON.stringify(listProjects));
+  };
+
+  const getLocalStorage = () => {
+    const data = JSON.parse(localStorage.getItem("projects"));
+    if (!data) return;
+    console.log(data);
+    listProjects = data;
+    View.renderProjects();
+  };
+
+  return {
+    newTodo,
+    getListProjects,
+    newProject,
+    deleteProject,
+    setLocalStorage,
+    getLocalStorage,
+  };
 })();
 
 const View = (function () {
@@ -52,7 +55,7 @@ const View = (function () {
       const html = `
       <div class="project" data-project="${i}">
       <button class="project--btn delete--project">❌</button>
-          <button class="project--btn edit--project">✏️</button>
+          <button class="project--btn edit--project">➕</button>
           <p>${v.projectName}<br>
           <span class="description">${
             v.projectDesc ? v.projectDesc : ""
@@ -63,6 +66,7 @@ const View = (function () {
       `;
       container.insertAdjacentHTML("afterbegin", html);
     }
+    Projects.setLocalStorage();
   };
   const renderTodos = (todo) => {
     const html = `
@@ -76,7 +80,6 @@ const View = (function () {
 
 createProject.addEventListener("click", function (e) {
   if (!inputProject.value) return;
-  console.log(inputDesc.value);
   Projects.newProject(inputProject.value, inputDesc.value);
   inputDesc.value = "";
   inputProject.value = "";
@@ -93,6 +96,7 @@ container.addEventListener("click", function (e) {
   project
     .querySelectorAll(".todo")
     .forEach((t) => t.classList.toggle("hidden"));
+  Projects.setLocalStorage();
 });
 
-View.renderProjects();
+Projects.getLocalStorage();
