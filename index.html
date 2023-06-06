@@ -8,25 +8,44 @@
     <title>To-do List</title>
   </head>
   <body>
-    <form class="todo--form hidden">
-      <h1>Add to-do</h1>
-      <label for="todo0">To-do</label><br />
-      <input type="text" id="todo0" name="todo0" /><br />
-      <label for="todo0">To-do</label><br />
-      <input type="text" id="todo0" name="todo0" /><br />
+    <form class="form__project hidden">
+      <button class="btn__project btn__closeform">❌</button>
+      <button class="btn__project btn__saveform">💾</button>
+      <h1>New Project</h1>
+      <p>
+        <label for="Title">Title</label><br />
+        <input type="text" class="form__input" id="Title" name="Title" />
+      </p>
+      <p>
+        <label for="description">Description</label><br />
+        <input
+          type="text"
+          class="form__input"
+          id="description"
+          name="description"
+        />
+      </p>
+      <p>
+        <label for="priority">Priority</label><br />
+        <select class="form__input" id="priority" name="priority">
+          <option value="unclassified" selected="selected">Unclassified</option>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+      </p>
+      <p>
+        <label for="due-date">Due Date</label><br />
+        <input type="date" class="form__input" id="due-date" name="due-date" />
+      </p>
+      <p>
+        <label for="to-do">To-do</label><br />
+        <input type="text" class="form__input" id="to-do" name="to-do" />
+      </p>
+      <p><button class="btn__addtodo">Add to-do ➕</button></p>
     </form>
-    <input
-      class="project--input new--project--input"
-      placeholder="Project title"
-    /><br /><input
-      class="project--input new--project--desc--input"
-      placeholder="Project description"
-    />
-
-    <button id="create--project">Create</button>
-    <div id="container">
-      <!-- <button class="Add">+</button> -->
-    </div>
+    <button class="btn__newproject">➕</button>
+    <div id="container"></div>
     <script src="script.js"></script>
   </body>
 </html>

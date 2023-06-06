@@ -1,14 +1,23 @@
 "use strict";
 
 const container = document.querySelector("#container");
-const createProject = document.querySelector("#create--project");
-const inputProject = document.querySelector(".new--project--input");
-const inputDesc = document.querySelector(".new--project--desc--input");
-
-const Controller = function () {};
+const createProject = document.querySelector(".btn__newproject");
+const formNewProject = document.querySelector(".form__project ");
 
 const Projects = (function () {
-  let listProjects = [];
+  let listProjects = [
+    {
+      projectName: "Test",
+      projectDesc: "This is test data",
+      dueDate: "Tomorrow",
+      priority: "High",
+      todos: [
+        "This is a test todo - 1",
+        "This is a test todo - 2",
+        "This is a test todo - 3",
+      ],
+    },
+  ];
 
   const newProject = (projectName, projectDesc, dueDate, priority) => {
     listProjects.push({
@@ -33,8 +42,8 @@ const Projects = (function () {
   const getLocalStorage = () => {
     const data = JSON.parse(localStorage.getItem("projects"));
     if (!data) return;
-    console.log(data);
-    listProjects = data;
+    listProjects = [];
+    data.forEach((p) => listProjects.push(p));
     View.renderProjects();
   };
 
@@ -54,12 +63,15 @@ const View = (function () {
     for (const [i, v] of Projects.getListProjects().entries()) {
       const html = `
       <div class="project" data-project="${i}">
-      <button class="project--btn delete--project">❌</button>
-          <button class="project--btn edit--project">➕</button>
+      <button class="btn__project btn__deleteproject">❌</button>
+          <button class="btn__project btn__editproject">✏️</button>
           <p>${v.projectName}<br>
           <span class="description">${
             v.projectDesc ? v.projectDesc : ""
-          }</span></p>
+          }</span><br>
+          <span class="description">Priority: ${v.priority}, Due: ${
+        v.dueDate
+      }</span></p>
           <ul class="todo-list">
           ${v.todos ? v.todos.map(renderTodos).join("") : ""}
         </div></ul>
@@ -79,16 +91,13 @@ const View = (function () {
 })();
 
 createProject.addEventListener("click", function (e) {
-  if (!inputProject.value) return;
-  Projects.newProject(inputProject.value, inputDesc.value);
-  inputDesc.value = "";
-  inputProject.value = "";
+  formNewProject.classList.remove("hidden");
 });
 
 container.addEventListener("click", function (e) {
   if (!e.target.closest(".project")) return;
   const project = e.target.closest(".project");
-  if (e.target.classList.contains("delete--project")) {
+  if (e.target.classList.contains("btn__deleteproject")) {
     Projects.deleteProject(project.dataset.project);
     View.renderProjects();
     return;

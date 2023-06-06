@@ -15,13 +15,9 @@ body {
   /* border-radius: 10px; */
 }
 
-#create--project {
-  /* border-radius: 10px; */
+.btn__newproject {
   font-size: 40px;
-  /* padding: 8px; */
-  height: 50px;
-  width: 150px;
-  margin-left: 20px;
+  padding: 8px;
 }
 
 #container {
@@ -57,14 +53,14 @@ body {
   display: none;
 }
 
-.project--btn {
+.btn__project {
   margin: 10px 5px 0px 0px;
   float: right;
   padding: 5px;
   height: fit-content;
 }
 
-.todo--form {
+.form__project {
   border: solid 2px black;
   padding: 20px;
   background-color: white;
@@ -73,8 +69,29 @@ body {
   position: fixed;
   z-index: 1;
   overflow: auto;
+  font-size: 25px;
 }
 
-.todo--form.hidden {
+.form__project.hidden {
   display: none;
+}
+
+.form__input {
+  width: 300px;
+}
+
+input[type="text"] {
+  font-size: 20px;
+}
+
+input[type="date"] {
+  font-size: 20px;
+}
+
+select {
+  font-size: 20px;
+}
+
+.form__project #to-do {
+  width: 500px;
 }
