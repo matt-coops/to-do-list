@@ -3,7 +3,7 @@
 const containerProject = document.querySelector("#container");
 const createProject = document.querySelector(".btn__newproject");
 const formProject = document.querySelector(".form__project ");
-const containerTodo = document.querySelector(".todo-container");
+const containerTodo = document.querySelector("#todo-container");
 
 const Projects = (function () {
   let listProjects = [];
@@ -70,9 +70,11 @@ const View = (function () {
           <span class="description">Priority: ${
             v.priority
           }</span><br><span class="description"> Due: ${v.dueDate}</span></p>
-          <ul class="todo-list">
+          <ul class="todo-list hidden">
           ${v.todos ? v.todos.map(renderTodos).join("") : ""}
-        </div></ul>
+          </ul>
+          <span class="expand">Click to expand / collapse</span>
+          </div>
       `;
       containerProject.insertAdjacentHTML("afterbegin", html);
     }
@@ -80,8 +82,7 @@ const View = (function () {
   };
   const renderTodos = (todo) => {
     const html = `
-      <li class="todo hidden">${todo}
-    </li>
+      <li class="todo">${todo}</li>
       `;
     return html;
   };
@@ -104,9 +105,7 @@ containerProject.addEventListener("click", function (e) {
     View.renderProjects();
     return;
   }
-  project
-    .querySelectorAll(".todo")
-    .forEach((t) => t.classList.toggle("hidden"));
+  document.querySelector(".todo-list").classList.toggle("hidden");
   Projects.setLocalStorage();
 });
 

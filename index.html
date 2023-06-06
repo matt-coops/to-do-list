@@ -39,7 +39,7 @@
         <input type="date" class="form__input" id="due-date" name="due-date" />
       </p>
       <p>
-      <div class="todo-container">
+      <div id="todo-container">
           <label for="todo">To-do</label><br />
           <button class="btn__deletetodo">❌</button>
           <input type="text" class="form__input todo" name="todo" /><br />
@@ -48,7 +48,9 @@
       <p><button class="btn__addtodo">Add to-do ➕</button></p>
     </form>
     <button class="btn__newproject">➕</button>
-    <div id="container"></div>
+    <div id="container">
+        <!-- <div id="todo-list" class="hidden"></div> -->
+    </div>
     <script src="script.js"></script>
   </body>
 </html>

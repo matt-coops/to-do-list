@@ -51,7 +51,7 @@ body {
   width: 600px;
 }
 
-.todo.hidden {
+.todo-list.hidden {
   display: none;
 }
 
@@ -106,4 +106,10 @@ select {
 
 .form__project #todo {
   width: 600px;
+}
+
+.expand {
+  float: right;
+  padding: 15px 5px 0px 0px;
+  font-size: 20px;
 }
