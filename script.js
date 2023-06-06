@@ -1,38 +1,31 @@
 "use strict";
 
-const container = document.querySelector("#container");
+const containerProject = document.querySelector("#container");
 const createProject = document.querySelector(".btn__newproject");
-const formNewProject = document.querySelector(".form__project ");
+const formProject = document.querySelector(".form__project ");
+const containerTodo = document.querySelector(".todo-container");
 
 const Projects = (function () {
-  let listProjects = [
-    {
-      projectName: "Test",
-      projectDesc: "This is test data",
-      dueDate: "Tomorrow",
-      priority: "High",
-      todos: [
-        "This is a test todo - 1",
-        "This is a test todo - 2",
-        "This is a test todo - 3",
-      ],
-    },
-  ];
+  let listProjects = [];
 
-  const newProject = (projectName, projectDesc, dueDate, priority) => {
+  const newProject = (projectName, projectDesc, priority, dueDate, todos) => {
     listProjects.push({
       projectName: `${projectName}`,
       projectDesc: `${projectDesc}`,
-      dueDate: `${dueDate}`,
       priority: `${priority}`,
+      dueDate: `${dueDate}`,
+      todos: `${todos}`,
     });
     View.renderProjects();
   };
   const getListProjects = () => listProjects;
   const deleteProject = (index) => listProjects.splice(index, 1);
 
-  const newTodo = () => {
-    return { title, description, dueDate, priority };
+  const newTodo = (projectName, projectDesc, priority, dueDate, todos) => {
+    listProjects.push({ projectName, projectDesc, priority, dueDate, todos });
+    console.log(listProjects);
+    setLocalStorage();
+    View.renderProjects();
   };
 
   const setLocalStorage = () => {
@@ -42,9 +35,13 @@ const Projects = (function () {
   const getLocalStorage = () => {
     const data = JSON.parse(localStorage.getItem("projects"));
     if (!data) return;
-    listProjects = [];
-    data.forEach((p) => listProjects.push(p));
+    listProjects = data;
+
     View.renderProjects();
+  };
+
+  const clearLocalStorage = () => {
+    localStorage.clear();
   };
 
   return {
@@ -54,12 +51,13 @@ const Projects = (function () {
     deleteProject,
     setLocalStorage,
     getLocalStorage,
+    clearLocalStorage,
   };
 })();
 
 const View = (function () {
   const renderProjects = () => {
-    container.innerHTML = "";
+    containerProject.innerHTML = "";
     for (const [i, v] of Projects.getListProjects().entries()) {
       const html = `
       <div class="project" data-project="${i}">
@@ -68,15 +66,15 @@ const View = (function () {
           <p>${v.projectName}<br>
           <span class="description">${
             v.projectDesc ? v.projectDesc : ""
-          }</span><br>
-          <span class="description">Priority: ${v.priority}, Due: ${
-        v.dueDate
-      }</span></p>
+          }</span></p>
+          <span class="description">Priority: ${
+            v.priority
+          }</span><br><span class="description"> Due: ${v.dueDate}</span></p>
           <ul class="todo-list">
           ${v.todos ? v.todos.map(renderTodos).join("") : ""}
         </div></ul>
       `;
-      container.insertAdjacentHTML("afterbegin", html);
+      containerProject.insertAdjacentHTML("afterbegin", html);
     }
     Projects.setLocalStorage();
   };
@@ -91,10 +89,14 @@ const View = (function () {
 })();
 
 createProject.addEventListener("click", function (e) {
-  formNewProject.classList.remove("hidden");
+  formProject.querySelector("#due-date").value = new Date()
+    .toISOString()
+    .substring(0, 10);
+  formProject.querySelector("#priority").selected = "selected";
+  formProject.classList.remove("hidden");
 });
 
-container.addEventListener("click", function (e) {
+containerProject.addEventListener("click", function (e) {
   if (!e.target.closest(".project")) return;
   const project = e.target.closest(".project");
   if (e.target.classList.contains("btn__deleteproject")) {
@@ -108,4 +110,52 @@ container.addEventListener("click", function (e) {
   Projects.setLocalStorage();
 });
 
+formProject.addEventListener("click", function (e) {
+  if (e.target.closest(".btn__closeform")) {
+    e.preventDefault();
+    formProject.querySelectorAll(".form__input").forEach((f) => (f.value = ""));
+    formProject.classList.add("hidden");
+  }
+  if (e.target.closest(".btn__saveform")) {
+    e.preventDefault();
+    Projects.newTodo(
+      formProject.querySelector("#title").value,
+      formProject.querySelector("#description").value,
+      formProject.querySelector("#priority").value,
+      formProject.querySelector("#due-date").value,
+      formProject.querySelectorAll(".todo")
+        ? [...formProject.querySelectorAll(".todo")].map((x) => [x.value])
+        : [formProject.querySelector(".todo").value]
+    );
+    formProject.querySelectorAll(".form__input").forEach((f) => (f.value = ""));
+    formProject.classList.add("hidden");
+  }
+  if (e.target.closest(".btn__addtodo")) {
+    e.preventDefault();
+    const html = `
+    <button class="btn__deletetodo">❌</button>
+    <input type="text" class="form__input todo" name="todo" /><br />
+    `;
+    containerTodo.insertAdjacentHTML("beforeend", html);
+  }
+});
+
+// DRY
+document.addEventListener("keydown", function (e) {
+  if (e.key !== "Enter") return;
+  if (formProject.classList.contains("hidden")) return;
+  Projects.newTodo(
+    formProject.querySelector("#title").value,
+    formProject.querySelector("#description").value,
+    formProject.querySelector("#priority").value,
+    formProject.querySelector("#due-date").value,
+    formProject.querySelectorAll(".todo")
+      ? [...formProject.querySelectorAll(".todo")].map((x) => [x.value])
+      : [formProject.querySelector(".todo").value]
+  );
+  formProject.querySelectorAll(".form__input").forEach((f) => (f.value = ""));
+  formProject.classList.add("hidden");
+});
+
+// Projects.clearLocalStorage();
 Projects.getLocalStorage();

@@ -38,7 +38,8 @@ body {
   width: 600px;
   height: auto;
   font-size: 40px;
-  padding-left: 10px;
+  padding-left: 20px;
+  cursor: pointer;
 }
 
 .description {
@@ -47,6 +48,7 @@ body {
 
 .todo {
   font-size: 30px;
+  width: 600px;
 }
 
 .todo.hidden {
@@ -58,6 +60,12 @@ body {
   float: right;
   padding: 5px;
   height: fit-content;
+}
+.btn__deletetodo {
+  font-size: 10px;
+  height: 25px;
+  width: fit-content;
+  vertical-align: middle;
 }
 
 .form__project {
@@ -77,21 +85,25 @@ body {
 }
 
 .form__input {
+  vertical-align: middle;
   width: 300px;
 }
 
 input[type="text"] {
   font-size: 20px;
+  padding-left: 5px;
 }
 
 input[type="date"] {
   font-size: 20px;
+  padding-left: 5px;
 }
 
 select {
   font-size: 20px;
+  /* padding-left: 5px; */
 }
 
-.form__project #to-do {
-  width: 500px;
+.form__project #todo {
+  width: 600px;
 }

@@ -10,11 +10,11 @@
   <body>
     <form class="form__project hidden">
       <button class="btn__project btn__closeform">❌</button>
-      <button class="btn__project btn__saveform">💾</button>
+      <input type="submit" class="btn__project btn__saveform" value="💾"></input>
       <h1>New Project</h1>
       <p>
-        <label for="Title">Title</label><br />
-        <input type="text" class="form__input" id="Title" name="Title" />
+        <label for="title">Title</label><br />
+        <input type="text" class="form__input" id="title" name="title" />
       </p>
       <p>
         <label for="description">Description</label><br />
@@ -28,7 +28,7 @@
       <p>
         <label for="priority">Priority</label><br />
         <select class="form__input" id="priority" name="priority">
-          <option value="unclassified" selected="selected">Unclassified</option>
+          <option value="not-classified">Not classified</option>
           <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
@@ -39,9 +39,12 @@
         <input type="date" class="form__input" id="due-date" name="due-date" />
       </p>
       <p>
-        <label for="to-do">To-do</label><br />
-        <input type="text" class="form__input" id="to-do" name="to-do" />
-      </p>
+      <div class="todo-container">
+          <label for="todo">To-do</label><br />
+          <button class="btn__deletetodo">❌</button>
+          <input type="text" class="form__input todo" name="todo" /><br />
+        </div>
+    </p>
       <p><button class="btn__addtodo">Add to-do ➕</button></p>
     </form>
     <button class="btn__newproject">➕</button>
