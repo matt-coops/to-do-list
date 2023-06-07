@@ -28,7 +28,7 @@
       <p>
         <label for="priority">Priority</label><br />
         <select class="form__input" id="priority" name="priority">
-          <option value="not-classified">Not classified</option>
+          <option value="none"></option>
           <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
@@ -37,15 +37,18 @@
       <p>
         <label for="due-date">Due Date</label><br />
         <input type="date" class="form__input" id="due-date" name="due-date" />
+        <!-- <input type="checkbox" class="form__input" id="no-date" name="no-date" />
+        <label for="no-date">No date required</label><br /> -->
       </p>
       <p>
       <div id="todo-container">
-          <label for="todo">To-do</label><br />
-          <button class="btn__deletetodo">❌</button>
-          <input type="text" class="form__input todo" name="todo" /><br />
+          <br><label for="todo">To-do</label>
+          <button class="btn__addtodo">➕</button><br>
+
+          <button class="btn__deletetodo" data-counter="0">❌</button>
+          <input type="text" class="input__todo" name="todo" data-counter="0" /><br />
         </div>
     </p>
-      <p><button class="btn__addtodo">Add to-do ➕</button></p>
     </form>
     <button class="btn__newproject">➕</button>
     <div id="container">

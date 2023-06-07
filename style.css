@@ -16,56 +16,18 @@ body {
 }
 
 .btn__newproject {
-  font-size: 40px;
+  font-size: 20px;
   padding: 8px;
 }
 
 #container {
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
+  margin-top: 15px;
   display: flex;
-  gap: 20px;
+  gap: 0px;
   /* border: solid 2px black; */
   /* background-color: rgb(160, 160, 160); */
-}
-
-.project {
-  background-color: rgb(214, 214, 214);
-  border-radius: 10px;
-  margin: 10px 0px;
-  border: solid 2px black;
-  width: 600px;
-  height: auto;
-  font-size: 40px;
-  padding-left: 20px;
-  cursor: pointer;
-}
-
-.description {
-  font-size: 30px;
-}
-
-.todo {
-  font-size: 30px;
-  width: 600px;
-}
-
-.todo-list.hidden {
-  display: none;
-}
-
-.btn__project {
-  margin: 10px 5px 0px 0px;
-  float: right;
-  padding: 5px;
-  height: fit-content;
-}
-.btn__deletetodo {
-  font-size: 10px;
-  height: 25px;
-  width: fit-content;
-  vertical-align: middle;
 }
 
 .form__project {
@@ -77,16 +39,61 @@ body {
   position: fixed;
   z-index: 1;
   overflow: auto;
-  font-size: 25px;
+  font-size: 20px;
 }
 
-.form__project.hidden {
-  display: none;
+.project {
+  background-color: rgb(214, 214, 214);
+  border-radius: 10px;
+  margin: 10px 0px;
+  border: solid 2px black;
+  min-width: 600px;
+  width: fit-content;
+  height: auto;
+  font-size: 30px;
+  padding-left: 20px;
+  cursor: pointer;
+}
+
+.description {
+  font-size: 20px;
+}
+
+.btn__project {
+  margin: 10px 5px 0px 0px;
+  float: right;
+  padding: 5px;
+  height: fit-content;
+  vertical-align: middle;
 }
 
 .form__input {
   vertical-align: middle;
   width: 300px;
+}
+
+.btn__addtodo {
+  vertical-align: middle;
+  font-size: 10px;
+}
+
+.input__todo {
+  vertical-align: middle;
+  font-size: 30px;
+  width: 600px;
+  margin-top: 5px;
+}
+
+.btn__deletetodo {
+  font-size: 10px;
+  height: 25px;
+  width: fit-content;
+  vertical-align: middle;
+  margin-top: 5px;
+}
+
+.form__project.hidden {
+  display: none;
 }
 
 input[type="text"] {
@@ -104,12 +111,12 @@ select {
   /* padding-left: 5px; */
 }
 
-.form__project #todo {
-  width: 600px;
-}
-
 .expand {
   float: right;
   padding: 15px 5px 0px 0px;
-  font-size: 20px;
+  font-size: 15px;
+}
+
+.hidden {
+  display: none;
 }
